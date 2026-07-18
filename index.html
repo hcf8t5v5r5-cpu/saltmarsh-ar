@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salt Marsh AR Scanner</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin: 0; }
+    #loading {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(0,0,0,0.7); color: white;
+      text-align: center; padding: 16px; font-family: Arial, sans-serif;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Point your camera at a clay figure...</div>
+
+  <a-scene mindar-image="imageTargetSrc: targets.mind;" color-space="sRGB"
+           renderer="colorManagement: true, physicallyCorrectLights"
+           vr-mode-ui="enabled: false"
+           device-orientation-permission-ui="enabled: false">
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity id="target0" mindar-image-target="targetIndex: 0"></a-entity>
+    <a-entity id="target1" mindar-image-target="targetIndex: 1"></a-entity>
+    <a-entity id="target2" mindar-image-target="targetIndex: 2"></a-entity>
+    <a-entity id="target3" mindar-image-target="targetIndex: 3"></a-entity>
+  </a-scene>
+
+  <script>
+    const routes = {
+      target0: "zostera.html",
+      target1: "crab.html",
+      target2: "egret.html",
+      target3: "otter.html"
+    };
+
+    Object.keys(routes).forEach((id) => {
+      const el = document.getElementById(id);
+      el.addEventListener("targetFound", () => {
+        window.location.href = routes[id];
+      });
+    });
+  </script>
+</body>
+</html>
