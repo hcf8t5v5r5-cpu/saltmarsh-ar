@@ -54,7 +54,12 @@ h3:first-of-type {
   </style>
 </head>
 <body>
-    <audio src="water.m4a" autoplay loop></audio>
+    <audio id="bgAudio" src="water.m4a" loop></audio>
+<script>
+  document.body.addEventListener('click', () => {
+    document.getElementById('bgAudio').play();
+  }, { once: true });
+</script>
 
   <img src="saltmarsh.png" alt="Salt marsh landscape">
 
